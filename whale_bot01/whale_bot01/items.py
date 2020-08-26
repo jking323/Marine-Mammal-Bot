@@ -9,4 +9,5 @@ import scrapy
 class WhaleBot01Item(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    pass
+    img_url = scrapy.Field()
+    files = scrapy.Field()
