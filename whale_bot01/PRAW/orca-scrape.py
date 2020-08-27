@@ -9,6 +9,7 @@ import csv
 import numpy as np
 import os
 
+
 """
 use praw to pull image URLs then youe scrapy to scrape images from that list
 """

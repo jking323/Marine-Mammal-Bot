@@ -66,7 +66,7 @@ ITEM_PIPELINES = {
     'whale_bot01.pipelines.WhaleBot01Pipeline': 300,
     'scrapy.pipelines.images.ImagesPipeline': 1
 }
-IMAGES_STORE = 'C:\temp\whale'
+IMAGES_STORE = 's3://orca-bot-bucket/orcas'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
