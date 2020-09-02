@@ -10,6 +10,7 @@ import tensorflow as tf
 import tensorflow_hub as hub
 from tensorflow.keras import layers
 import pathlib
+#from keras.backend.tensorflow_backend import set_session
 
 print("TF version:", tf.__version__)
 print("Hub version:", hub.__version__)
@@ -92,3 +93,19 @@ model.fit(
     epochs=10
 )
 
+whale_url = "https://i.imgur.com/SzPOk.jpg"
+whale_path = tf.keras.utils.get_file('whale', origin=whale_url)
+
+img = tf.keras.preprocessing.image.load_img(
+    whale_path, target_size=(img_height, img_width)
+)
+img_array = tf.keras.preprocessing.image.img_to_array(img)
+img_array = tf.expand_dims(img_array, 0)
+
+predictions = model.predict(img_array)
+score = tf.nn.softmax(predictions[0])
+
+print(
+    "This image most likely belongs to {} with a {:.2f} percent confidence."
+    .format(class_names[np.argmax(score)], 100 * np.max(score))
+)
