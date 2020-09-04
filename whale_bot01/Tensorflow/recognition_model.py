@@ -15,7 +15,8 @@ import pathlib
 print("TF version:", tf.__version__)
 print("Hub version:", hub.__version__)
 
-dataset = pathlib.Path("Z:/Workspacescurrent/orca-data/")
+dataset = pathlib.Path("E:\git\Marine-Mammal-Bot\orca-data")
+trainset = pathlib.Path("E:\git\Marine-Mammal-Bot\orca-val")
 
 batch_size = 32
 img_height = 150
@@ -30,7 +31,7 @@ train_ds = tf.keras.preprocessing.image_dataset_from_directory(
     batch_size=batch_size)
 
 val_ds = tf.keras.preprocessing.image_dataset_from_directory(
-    dataset,
+    trainset,
     validation_split=0.2,
     subset="validation",
     seed=123,
@@ -90,9 +91,11 @@ model.compile(
 model.fit(
     train_ds,
     validation_data=val_ds,
-    epochs=10
+    epochs=1
 )
 
+model.save("E:\git\Marine-Mammal-Bot\model")
+"""
 whale_url = "https://i.imgur.com/SzPOk.jpg"
 whale_path = tf.keras.utils.get_file('whale', origin=whale_url)
 
@@ -109,3 +112,4 @@ print(
     "This image most likely belongs to {} with a {:.2f} percent confidence."
     .format(class_names[np.argmax(score)], 100 * np.max(score))
 )
+"""
