@@ -10,6 +10,7 @@ import tensorflow as tf
 import tensorflow_hub as hub
 from tensorflow.keras import layers
 import pathlib
+import datetime
 #from keras.backend.tensorflow_backend import set_session
 
 print("TF version:", tf.__version__)
@@ -88,15 +89,24 @@ model.compile(
     loss=tf.losses.SparseCategoricalCrossentropy(from_logits=True),
     metrics=['accuracy'])
 
+#log_dir = "E:\git\Logs" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+#tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=1)
+
+checkpoint_path = 'E:\git\checkpoints'
+checkpoint_dir = os.path.dirname(checkpoint_path)
+
+cp_callbacks = tf.keras.callbacks.ModelCheckpoint(checkpoint_path=checkpoint_path,
+                                                save_weights_only=True,
+                                                verbose=1)
 model.fit(
     train_ds,
     validation_data=val_ds,
-    epochs=1
+    epochs=10,
+    callbacks=[cp_callbacks]
+#    callbacks=[tensorboard_callback]
 )
 
-model.save("E:\git\Marine-Mammal-Bot\model")
-"""
-whale_url = "https://i.imgur.com/SzPOk.jpg"
+whale_url = "https://cdn.cnn.com/cnnnext/dam/assets/200728115037-03-orca-whale-pregnant-scn-trnd-exlarge-169.jpg"
 whale_path = tf.keras.utils.get_file('whale', origin=whale_url)
 
 img = tf.keras.preprocessing.image.load_img(
@@ -112,4 +122,3 @@ print(
     "This image most likely belongs to {} with a {:.2f} percent confidence."
     .format(class_names[np.argmax(score)], 100 * np.max(score))
 )
-"""

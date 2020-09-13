@@ -13,7 +13,7 @@ import pathlib
 #from recognition_model import dataset
 
 directory = pathlib.Path('E:\git\Marine-Mammal-Bot\orca-data')
-
+#
 train_ds = tf.keras.preprocessing.image_dataset_from_directory(
         directory,
         labels="inferred",
