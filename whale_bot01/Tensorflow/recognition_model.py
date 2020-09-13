@@ -92,12 +92,11 @@ model.compile(
 #log_dir = "E:\git\Logs" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
 #tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=1)
 
-checkpoint_path = 'E:\git\checkpoints'
+checkpoint_path = 'E:\git\checkpoints\cp.ckpt'
 checkpoint_dir = os.path.dirname(checkpoint_path)
 
-cp_callbacks = tf.keras.callbacks.ModelCheckpoint(checkpoint_path=checkpoint_path,
-                                                save_weights_only=True,
-                                                verbose=1)
+cp_callbacks = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_path, save_weights_only=True, verbose=1)
+
 model.fit(
     train_ds,
     validation_data=val_ds,
