@@ -13,6 +13,7 @@ from tensorflow.keras import layers
 import pathlib
 import datetime
 
+
 #prints the current version of tensorflow
 
 print("TF version:", tf.__version__)
@@ -23,7 +24,7 @@ print("Hub version:", hub.__version__)
 dataset = pathlib.Path("C:\whale\orca-data")
 trainset = pathlib.Path("C:\whale\orca-val")
 
-#defines processign batch size and image dimensions
+#defines processing batch size and image dimensions
 
 batch_size = 32
 img_height = 150
